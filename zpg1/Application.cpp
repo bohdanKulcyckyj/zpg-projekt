@@ -1,19 +1,59 @@
 #include "Application.h"
 
-void Application::cursor_pos_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	//printf("cursor_pos_callback %d, %d; %d, %d\n", (int)mouseX, (int)mouseY, (int)clickX, (int)clickY);
-	printf("Hhh");
+Application* Application::instance = nullptr;
+
+Application* Application::getInstance() {
+	return instance;
+}
+
+Application::Application() {
+	instance = this;
+}
+
+// Callbacks
+void Application::onError(int error, const char* description) {
+	fputs(description, stderr);
+}
+
+void Application::onKey(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
+}
+
+void Application::onWindowFocus(GLFWwindow* window, int focused) {
+	printf("onWindowFocus callback \n");
+}
+
+void Application::onWindowIconify(GLFWwindow* window, int iconified) {
+	printf("onWindowIconify callback \n");
+}
+
+void Application::onWindowResize(GLFWwindow* window, int width, int height) {
+	printf("resize %d, %d \n", width, height);
+	glViewport(0, 0, width, height);
+}
+
+void Application::onCursor(GLFWwindow* window, double x, double y) {
+	printf("onCursor callback \n");
+}
+
+void Application::onButton(GLFWwindow* window, int button, int action, int mode) {
+	if (action == GLFW_PRESS) printf("onButton callback [%d,%d,%d]\n", button, action, mode);
 }
 
 void Application::initialization() {
-	glfwSetErrorCallback(error_callback);
-
+	// int error, const char* description
+	glfwSetErrorCallback([](int error, const char* description) {
+		Application::getInstance()->onError(error, description);
+		});
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
 		exit(EXIT_FAILURE);
 	}
 
-	window = glfwCreateWindow(800, 600, "KUL0131", NULL, NULL);
+	this->window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
@@ -22,8 +62,10 @@ void Application::initialization() {
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
+	// start GLEW extension handler
 	glewExperimental = GL_TRUE;
 	glewInit();
+
 
 	// get version info
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
@@ -39,52 +81,111 @@ void Application::initialization() {
 	glfwGetFramebufferSize(window, &width, &height);
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
-}
 
-void Application::createShaders() {
-	//vertex buffer object (VBO)
-	//GLuint VBO = 0;
-	glGenBuffers(1, &VBO); // generate the VBO
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		Application::getInstance()->onKey(window, key, scancode, action, mods);
+	});
 
-	//Vertex Array Object (VAO)
-	//GLuint VAO = 0;
-	glGenVertexArrays(1, &VAO); //generate the VAO
-	glBindVertexArray(VAO); //bind the VAO
-	glEnableVertexAttribArray(0); //enable vertex attributes
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double x, double y) {
+		Application::getInstance()->onCursor(window, x, y);
+	});
 
+	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
+		Application::getInstance()->onButton(window, button, action, mods);
+	});
 
-	//create and compile shaders
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertex_shader, NULL);
-	glCompileShader(vertexShader);
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragment_shader, NULL);
-	glCompileShader(fragmentShader);
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, fragmentShader);
-	glAttachShader(shaderProgram, vertexShader);
-	glLinkProgram(shaderProgram);
+	glfwSetWindowFocusCallback(window, [](GLFWwindow* window, int focused) {
+		Application::getInstance()->onWindowFocus(window, focused);
+	});
+
+	glfwSetWindowIconifyCallback(window, [](GLFWwindow* window, int iconified) {
+		Application::getInstance()->onWindowIconify(window, iconified);
+	});
+
+	glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
+		Application::getInstance()->onWindowResize(window, width, height);
+	});
 }
 
 void Application::run() {
-	while (!glfwWindowShouldClose(this->window)) {
+	while (!glfwWindowShouldClose(window)) {
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
-		// draw triangles
-		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
-		// update other events like input handling
+
+		for (auto model : this->models) {
+			model->draw();
+		}
+
 		glfwPollEvents();
 		// put the stuff we’ve been drawing onto the display
 		glfwSwapBuffers(window);
 	}
 
 	glfwDestroyWindow(window);
+
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
+}
+
+void Application::createModels() {
+	float trianglePoints[] = {
+	 0.0f, 0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f
+	};
+	const char* vertex_shader =
+		"#version 330\n"
+		"layout(location=0) in vec3 vp;"
+		"void main () {"
+		"     gl_Position = vec4 (vp, 1.0);"
+		"}";
+
+	const char* fragment_shader =
+		"#version 330\n"
+		"out vec4 frag_colour;"
+		"void main () {"
+		"     frag_colour = vec4 (255, 0.1, 0.1, 1.0);"
+		"}";
+
+	ShaderProgram* triangle1_shaderProgram = new ShaderProgram();
+	Triangle* triangle1 = new Triangle(trianglePoints, sizeof(trianglePoints), triangle1_shaderProgram);
+	triangle1_shaderProgram->addShader(GL_FRAGMENT_SHADER, fragment_shader);
+	triangle1_shaderProgram->addShader(GL_VERTEX_SHADER, vertex_shader);
+	triangle1_shaderProgram->createProgram();
+	this->models.push_back(triangle1);
+
+	Vertex rectangleVertices[] = {
+		{ {0.9f, 0.9f, 0.0f}, {0.0f, 0.0f, 1.0f, 1.0f} },
+		{ {0.9f, 0.5f, 0.0f}, {0.5f, 0.0f, 0.5f, 1.0f} },
+		{ {0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 0.0f, 1.0f} },
+		{ {0.5f, 0.9f, 0.0f}, {1.0f, 0.5f, 0.0f, 1.0f} },
+		{ {0.9f, 0.9f, 0.0f}, {0.0f, 1.0f, 1.0f, 1.0f} },
+		{ {0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f} }
+	};
+
+
+	const char* fragment_shader_color =
+		"#version 330\n"
+		"in vec4 fragColor;\n"
+		"out vec4 outColor;\n"
+		"void main () {\n"
+		"    outColor = fragColor;\n"
+		"}";
+
+	const char* vertex_shader_color =
+		"#version 330\n"
+		"layout(location=0) in vec3 vp;\n"
+		"layout(location=1) in vec4 vertexColor;\n"
+		"out vec4 fragColor;\n"
+		"void main () {\n"
+		"    gl_Position = vec4(vp, 1.0);\n"
+		"    fragColor = vertexColor;\n"
+		"}";
+	
+	ShaderProgram* rectangle1_shaderProgram = new ShaderProgram();
+	Rectangle* rectangle1 = new Rectangle(rectangleVertices, sizeof(rectangleVertices), rectangle1_shaderProgram);
+	rectangle1_shaderProgram->addShader(GL_FRAGMENT_SHADER, fragment_shader_color);
+	rectangle1_shaderProgram->addShader(GL_VERTEX_SHADER, vertex_shader_color);
+	rectangle1_shaderProgram->createProgram();
+	this->models.push_back(rectangle1);
 }

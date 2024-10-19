@@ -131,22 +131,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="BaseModel.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Transformation.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
