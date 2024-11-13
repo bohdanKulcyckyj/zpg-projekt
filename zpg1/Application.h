@@ -12,10 +12,7 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
 // Models
-#include "Triangle.h"
-#include "Rectangle.h"
-
-#include "Vertex.h"
+#include "Scene.h"
 
 #include <vector>
 
@@ -26,24 +23,14 @@ class Application
 private:
 	static Application* instance;
 	GLFWwindow* window;
-	vector<BaseModel*> models;
+	Scene* scene;
 
 public:
 	Application();
 	// singleton instance
 	static Application* getInstance();
 
-	// callbacks
-	void onError(int error, const char* description);
-	void onKey(GLFWwindow* window, int key, int scancode, int action, int mods);
-	void onWindowFocus(GLFWwindow* window, int focused);
-	void onWindowIconify(GLFWwindow* window, int iconified);
-	void onWindowResize(GLFWwindow* window, int width, int height);
-	void onCursor(GLFWwindow* window, double x, double y);
-	void onButton(GLFWwindow* window, int button, int action, int mode);
-
 	void initialization();
-	void createModels();
 	void run();
 };
 

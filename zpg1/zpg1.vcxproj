@@ -131,21 +131,56 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="BaseModel.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TransformComposite.cpp" />
+    <ClCompile Include="TransformRotate.cpp" />
+    <ClCompile Include="TransformScale.cpp" />
+    <ClCompile Include="TransformTranslate.cpp" />
+    <ClCompile Include="TreeModel.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="BaseModel.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="sphere.h" />
+    <ClInclude Include="Subject.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="TransformComposite.h" />
+    <ClInclude Include="TransformRotate.h" />
+    <ClInclude Include="TransformScale.h" />
+    <ClInclude Include="TransformTranslate.h" />
+    <ClInclude Include="tree.h" />
+    <ClInclude Include="TreeModel.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FragmentShader.glsl" />
+    <None Include="VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

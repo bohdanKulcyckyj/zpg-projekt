@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BaseModel.h"
+#include "Model.h"
 
-class Triangle : public BaseModel
+class Triangle : public Model
 {
 public:
-	Triangle(float* points, size_t pointsSize, ShaderProgram* sp);
+	Triangle(float* points, size_t pointsSize);
 	void draw() override;
 };
 

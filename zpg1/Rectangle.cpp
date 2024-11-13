@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(Vertex* points, size_t pointsSize, ShaderProgram* sp) : BaseModel(sp) {
+Rectangle::Rectangle(Vertex* points, size_t pointsSize) : Model() {
 	// Vertex Buffer Object (VBO)
 	this->VBO = 0;
 	glGenBuffers(1, &this->VBO);
@@ -22,7 +22,6 @@ Rectangle::Rectangle(Vertex* points, size_t pointsSize, ShaderProgram* sp) : Bas
 }
 
 void Rectangle::draw() {
-	this->shaderProgram->use();
 	glBindVertexArray(this->VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }

@@ -1,11 +1,11 @@
 #pragma once
 #include "Vertex.h"
-#include "BaseModel.h"
+#include "Model.h"
 
-class Rectangle : public BaseModel
+class Rectangle : public Model
 {
 public:
-	Rectangle(Vertex* points, size_t pointsSize, ShaderProgram* sp);
+	Rectangle(Vertex* points, size_t pointsSize);
 	void draw() override;
 };
 

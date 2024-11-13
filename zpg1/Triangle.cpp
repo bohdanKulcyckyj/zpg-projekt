@@ -1,6 +1,6 @@
 #include "Triangle.h"
 
-Triangle::Triangle(float* points, size_t pointsSize, ShaderProgram* sp) : BaseModel(sp) {
+Triangle::Triangle(float* points, size_t pointsSize) : Model() {
 	// Vertex buffer object (VBO)
 	this->VBO = 0;
 	glGenBuffers(1, &this->VBO); // generate the VBO
@@ -16,7 +16,6 @@ Triangle::Triangle(float* points, size_t pointsSize, ShaderProgram* sp) : BaseMo
 }
 
 void Triangle::draw() {
-	this->shaderProgram->use();
 	glBindVertexArray(this->VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
