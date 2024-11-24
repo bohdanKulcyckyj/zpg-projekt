@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// nemusi se vsechny transformace nutne vsechny prepocitavat
+
 class TransformComposite: public Transform
 {
 private:

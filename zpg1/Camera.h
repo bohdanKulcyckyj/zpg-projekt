@@ -11,25 +11,34 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
+#include "Point.h"
 #include "Subject.h"
 
-#define PROJECTIONMATRIX 0
-#define VIEWMATRIX 1
+using namespace std;
 
 class Camera : public Subject
 {
 private:
 	GLFWwindow* window;
 
-	glm::vec3 position = glm::vec3(5.0f, 2.0f, 0.0f); // glm::vec3(5.0f, 0.0f, 0.0f);
+	glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
-	glm::vec3 target = glm::vec3(-5.0f, 0.0f, 0.0f);
+	glm::vec3 target = glm::vec3(0.0f, 0.0f, 1.0f);
 
-	float speed = 0.05f;
+	float sensitivity = 0.5f;
+	float speed = 0.5f;
 	float ratio = 0;
 	float fov;
 	float near;
 	float far;
+	float alpha = 0.0f;
+	float beta = 0.0f;
+
+	Point* startPos = new Point(0, 0);
+	Point* endPos = new Point(0, 0);
+	Point* offsetPos = new Point(0, 0);
+
+	bool isFirstClick = true;
 
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;

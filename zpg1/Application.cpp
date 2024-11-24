@@ -48,11 +48,12 @@ void Application::initialization() {
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 
-	scene = new Scene(window);
+	// scene = new SceneSpheres(window);
+	scene = new SceneForest(window);
 	scene->registerCallbacks();
 }
 
 void Application::run() {
-	scene->initModels();
+	scene->init();
 	scene->render();
 }

@@ -140,13 +140,16 @@
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SceneForest.cpp" />
+    <ClCompile Include="SceneSpheres.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="SphereModel.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformComposite.cpp" />
     <ClCompile Include="TransformRotate.cpp" />
+    <ClCompile Include="TransformRotateDynamic.cpp" />
     <ClCompile Include="TransformScale.cpp" />
     <ClCompile Include="TransformTranslate.cpp" />
     <ClCompile Include="TreeModel.cpp" />
@@ -160,17 +163,21 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="SceneForest.h" />
+    <ClInclude Include="SceneSpheres.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="sphere.h" />
+    <ClInclude Include="SphereModel.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformComposite.h" />
     <ClInclude Include="TransformRotate.h" />
+    <ClInclude Include="TransformRotateDynamic.h" />
     <ClInclude Include="TransformScale.h" />
     <ClInclude Include="TransformTranslate.h" />
     <ClInclude Include="tree.h" />
@@ -180,7 +187,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FragmentShader.glsl" />
+    <None Include="FragmentShaderLambert.glsl" />
+    <None Include="FragmentShaderPhong.glsl" />
+    <None Include="FragmentShaderTest.glsl" />
     <None Include="VertexShader.glsl" />
+    <None Include="VertexShaderLambert.glsl" />
+    <None Include="VertexShaderPhong.glsl" />
+    <None Include="VertexShaderTest.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

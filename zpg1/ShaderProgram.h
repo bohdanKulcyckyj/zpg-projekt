@@ -4,8 +4,8 @@
 
 #include "Observer.h"
 #include "ShaderLoader.h"
-#include "Shader.h"
 #include "Camera.h"
+#include "Light.h"
 #include <vector>
 
 using namespace std;
@@ -13,10 +13,14 @@ using namespace std;
 class ShaderProgram : public Observer, public ShaderLoader
 {
 private:
-    Camera* camera;
+    Camera* camera = nullptr;
+    Light* light = nullptr;
 public:
     ShaderProgram(Camera* c);
+    ShaderProgram(Camera* c, Light* l);
     ~ShaderProgram();
+
+    void addLight(Light* l);
 
     void use();
     void unuse();

@@ -12,7 +12,8 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
 // Models
-#include "Scene.h"
+#include "SceneForest.h"
+#include "SceneSpheres.h"
 
 #include <vector>
 

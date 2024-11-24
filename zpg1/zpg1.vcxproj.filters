@@ -33,9 +33,6 @@
     <ClCompile Include="ShaderProgram.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
@@ -87,15 +84,24 @@
     <ClCompile Include="Light.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
+    <ClCompile Include="SceneForest.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSpheres.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereModel.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformRotateDynamic.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -161,12 +167,45 @@
     <ClInclude Include="Light.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="SceneForest.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSpheres.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereModel.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformRotateDynamic.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="FragmentShader.glsl">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="VertexShader.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="FragmentShaderPhong.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="VertexShaderPhong.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="FragmentShaderTest.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="VertexShaderTest.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="FragmentShaderLambert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="VertexShaderLambert.glsl">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

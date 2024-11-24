@@ -28,6 +28,42 @@ void Camera::controls() {
 	{
 		position += speed * glm::normalize(glm::cross(target, up));
 	}
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+	{
+		if (isFirstClick)
+		{
+			startPos->x = currWidth / 2;
+			startPos->y = currHeight / 2;
+			glfwSetCursorPos(window, startPos->x, startPos->y);
+			isFirstClick = false;
+		}
+
+		glfwGetCursorPos(window, &endPos->x, &endPos->y);
+		offsetPos->x = endPos->x - startPos->x;
+		offsetPos->y = startPos->y - endPos->y;
+
+		startPos[0] = endPos[0];
+		startPos[1] = endPos[1];
+
+		Point::multiplyBy(offsetPos, sensitivity);
+
+		alpha += offsetPos->x;
+		beta += offsetPos->y;
+
+		if (beta > 89.9f)
+			beta = 89.9f;
+		if (beta < -89.9f)
+			beta = -89.9f;
+
+		target.x = sin(glm::radians(alpha)) * cos(glm::radians(beta));
+		target.y = sin(glm::radians(beta));
+		target.z = cos(glm::radians(alpha)) * -cos(glm::radians(beta));
+	}
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
+	{
+		isFirstClick = true;
+	}
 }
 
 glm::vec3 Camera::getPosition()

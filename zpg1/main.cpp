@@ -19,3 +19,6 @@ int main(void)
 
 // =======================
 // v ShaderProgramu do updateUnoform posilat spis tridu transformace a ne matici
+
+// naučit se co je dot product vzorec
+// = cos alfa * |vector a| * |vector b|

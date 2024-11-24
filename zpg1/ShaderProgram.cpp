@@ -1,9 +1,21 @@
 #include "ShaderProgram.h"
-#include "Shader.h"
 #include <iostream>
 
 ShaderProgram::ShaderProgram(Camera* c) : ShaderLoader() {
     camera = c;
+}
+
+ShaderProgram::ShaderProgram(Camera* c, Light* l) : ShaderLoader() {
+    camera = c;
+    light = l;
+}
+
+void ShaderProgram::addLight(Light* l) {
+    light = l;
+    use();
+    updateUniform("lightColor", light->getColor());
+    updateUniform("lightPosition", light->getPosition());
+    unuse();
 }
 
 ShaderProgram::~ShaderProgram() {
@@ -20,6 +32,11 @@ void ShaderProgram::unuse() {
 
 void ShaderProgram::update(int message)
 {
+    use();
+    updateUniform("lightColor", light->getColor());
+    updateUniform("lightPosition", light->getPosition());
+    unuse();
+
     if (message == VIEWMATRIX)
     {
         printf("updating view matrix\n");
@@ -42,6 +59,20 @@ void ShaderProgram::update(int message)
         return;
     }
 
+    if (message == LIGHTCOLOR && light != nullptr) {
+        printf("updating light color");
+        use();
+        updateUniform("lightColor", light->getColor());
+        unuse();
+    }
+
+    if (message == LIGHTPOSITION && light != nullptr) {
+        printf("updating light position");
+        use();
+        updateUniform("lightPosition", light->getPosition());
+        unuse();
+    }
+
     throw exception("Unknown message");
 }
 
@@ -53,6 +84,8 @@ void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
     {
         glUniformMatrix4fv(location, 1, GL_FALSE, value);
     }
+
+    // thrownout error radsi
 }
 
 void ShaderProgram::updateUniform(const char* variable, glm::vec3 value)
