@@ -13,7 +13,9 @@
 #include "TransformRotate.h"
 #include "TransformRotateDynamic.h"
 #include "TransformScale.h"
+#include "TransformScaleDynamic.h"
 #include "TransformTranslate.h"
+#include "TransformTranslateDynamic.h"
 #include "Vertex.h"
 #include "Light.h"
 

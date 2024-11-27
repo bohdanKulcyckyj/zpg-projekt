@@ -13,6 +13,6 @@ private:
 	vector<Transform*> transforms;
 public:
 	void addTransform(Transform* t);
-	glm::mat4 computeTransform();
+	glm::mat4 computeTransform() override;
 };
 

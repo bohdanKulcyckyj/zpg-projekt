@@ -9,5 +9,6 @@ protected:
 	glm::vec3 axis;
 public: 
 	TransformRotate(float angle, glm::vec3 axis);
+	glm::mat4 computeTransform() override;
 };
 

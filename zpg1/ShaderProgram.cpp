@@ -73,7 +73,7 @@ void ShaderProgram::update(int message)
         unuse();
     }
 
-    throw exception("Unknown message");
+    throw exception("Unknown update message");
 }
 
 void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
@@ -83,9 +83,10 @@ void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
     if (location >= 0)
     {
         glUniformMatrix4fv(location, 1, GL_FALSE, value);
+        return;
     }
 
-    // thrownout error radsi
+    throw exception("Invalid uniform location ID");
 }
 
 void ShaderProgram::updateUniform(const char* variable, glm::vec3 value)
@@ -95,7 +96,9 @@ void ShaderProgram::updateUniform(const char* variable, glm::vec3 value)
     if (location >= 0)
     {
         glUniform3f(location, value.x, value.y, value.z);
+        return;
     }
+    // throw exception("Invalid uniform location ID");
 }
 
 void ShaderProgram::updateUniform(const char* variable, float value)
@@ -105,7 +108,9 @@ void ShaderProgram::updateUniform(const char* variable, float value)
     if (location >= 0)
     {
         glUniform1f(location, value);
+        return;
     }
+    throw exception("Invalid uniform location ID");
 }
 
 void ShaderProgram::updateUniform(const char* variable, int value)
@@ -115,5 +120,7 @@ void ShaderProgram::updateUniform(const char* variable, int value)
     if (location >= 0)
     {
         glUniform1i(location, value);
+        return;
     }
+    throw exception("Invalid uniform location ID");
 }

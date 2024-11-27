@@ -23,12 +23,13 @@ void SceneForest::init() {
 
 		glm::vec3 scale(scale_dist(gen), scale_dist(gen), scale_dist(gen));
 		float rotation_angle = rotate_dist(gen);
-		glm::vec3 rotation_axis(0.0f, 1.0f, 0.0f);
+		glm::vec3 rotation_axis(0.0f, 0.1f, 0.0f);
 		glm::vec3 translation(translate_dist(gen), 0.0f, translate_dist(gen));
 
 		obj_tree->addTransform(new TransformScale(scale));
-		obj_tree->addTransform(new TransformRotateDynamic(rotation_angle, rotation_axis));
+		// obj_tree->addTransform(new TransformRotate(rotation_angle, rotation_axis));
 		obj_tree->addTransform(new TransformTranslate(translation));
+		obj_tree->addTransform(new TransformRotateDynamic(rotation_angle, rotation_axis, 0.5));
 
 		this->objects.push_back(obj_tree);
 		this->camera->attach(tree_shaderProgram);

@@ -151,7 +151,9 @@
     <ClCompile Include="TransformRotate.cpp" />
     <ClCompile Include="TransformRotateDynamic.cpp" />
     <ClCompile Include="TransformScale.cpp" />
+    <ClCompile Include="TransformScaleDynamic.cpp" />
     <ClCompile Include="TransformTranslate.cpp" />
+    <ClCompile Include="TransformTranslateDynamic.cpp" />
     <ClCompile Include="TreeModel.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
@@ -179,7 +181,9 @@
     <ClInclude Include="TransformRotate.h" />
     <ClInclude Include="TransformRotateDynamic.h" />
     <ClInclude Include="TransformScale.h" />
+    <ClInclude Include="TransformScaleDynamic.h" />
     <ClInclude Include="TransformTranslate.h" />
+    <ClInclude Include="TransformTranslateDynamic.h" />
     <ClInclude Include="tree.h" />
     <ClInclude Include="TreeModel.h" />
     <ClInclude Include="Triangle.h" />

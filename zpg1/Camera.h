@@ -21,7 +21,7 @@ class Camera : public Subject
 private:
 	GLFWwindow* window;
 
-	glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 eye = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
 	glm::vec3 target = glm::vec3(0.0f, 0.0f, 1.0f);
 

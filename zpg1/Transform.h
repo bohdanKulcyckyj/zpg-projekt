@@ -12,5 +12,6 @@ protected:
 	glm::mat4 matrix = glm::mat4(1.0f);
 public:
 	glm::mat4 getMatrix();
+	virtual glm::mat4 computeTransform() = 0;
 };
 

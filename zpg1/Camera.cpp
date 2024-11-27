@@ -5,28 +5,28 @@ Camera::Camera(GLFWwindow* w) {
 }
 
 glm::mat4 Camera::getCamera(void) {
-	return glm::lookAt(position, position + target, up);
+	return glm::lookAt(eye, eye + target, up);
 }
 
 void Camera::controls() {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		position += speed * target;
+		eye += speed * target;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		position -= speed * target;
+		eye -= speed * target;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		position -= speed * glm::normalize(glm::cross(target, up));
+		eye -= speed * glm::normalize(glm::cross(target, up));
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		position += speed * glm::normalize(glm::cross(target, up));
+		eye += speed * glm::normalize(glm::cross(target, up));
 	}
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
@@ -68,7 +68,7 @@ void Camera::controls() {
 
 glm::vec3 Camera::getPosition()
 {
-	return this->position;
+	return this->eye;
 }
 
 glm::vec3 Camera::getDirection()
@@ -101,9 +101,9 @@ void Camera::checkForChanges()
 }
 bool Camera::hasViewMatrixChanged()
 {
-	if (prevPosition != position || prevTarget != target)
+	if (prevPosition != eye || prevTarget != target)
 	{
-		prevPosition = position;
+		prevPosition = eye;
 		prevTarget = target;
 		computeViewMatrix();
 
@@ -130,10 +130,11 @@ bool Camera::hasProjectionMatrixChanged()
 }
 
 void Camera::computeViewMatrix() {
-	this->viewMatrix = glm::lookAt(position, position + target, up);
+	this->viewMatrix = glm::lookAt(eye, eye + target, up);
 }
 
 void Camera::computeProjectionMatrix() {
+
 	this->projectionMatrix = glm::perspective(glm::radians(fov), ratio, near, far);
 }
 

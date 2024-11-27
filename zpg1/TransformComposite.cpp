@@ -10,7 +10,7 @@ glm::mat4 TransformComposite::computeTransform() {
 
 	for (auto t : transforms)
 	{
-		this->matrix = this->matrix * t->getMatrix();
+		this->matrix *= t->computeTransform();
 	}
 
 	return this->matrix;
