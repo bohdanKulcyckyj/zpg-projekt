@@ -18,6 +18,7 @@
 #include "TransformTranslateDynamic.h"
 #include "Vertex.h"
 #include "Light.h"
+#include "LightManager.h";
 
 class Scene
 {

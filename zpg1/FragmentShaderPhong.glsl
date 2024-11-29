@@ -1,36 +1,33 @@
 #version 330
 
-light
-int type
-vec3 pos
-veæ3 dir
-
-// for cyklus pres svetla
-
 in vec3 worldFragmentPosition;
 in vec3 worldNormal;
 
+uniform vec4 lightColor;
+uniform vec3 lightPosition;
+uniform vec3 cameraPosition;
+uniform vec3 cameraDirection;
+
 out vec4 out_Color;
 
-uniform vec3 lightPosition;
-uniform vec3 lightColor;
-uniform vec3 viewPosition = vec3(0.0, 0.0, 1.0);
-uniform vec3 objectColor = vec3(0.385, 0.647, 0.812);
-uniform float shininess = 32.0;
-
 void main(void) {
+    vec3 cameraVector = normalize(cameraPosition - worldFragmentPosition);
     vec3 lightVector = normalize(lightPosition - worldFragmentPosition);
-    vec3 norm = normalize(worldNormal);
+    vec3 normal = normalize(worldNormal);
 
-    vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
+    // ambient
+    vec3 ambient = vec3(0.1, 0.1, 0.1, 1.0); // * lightColor;
 
-    float dot_product = max(dot(lightVector, norm), 0.0);
-    vec4 diffuse = dot_product * vec4(lightColor * objectColor, 1.0); // object color jen ??
+    // diffuse
+    float diffuseStrength = max(0.0, dot(lightVector, normal));
+    vec3 diffuse = diffuseStrength * lightColor;
 
-    vec3 viewDir = normalize(viewPosition - worldFragmentPosition);
-    vec3 reflectDir = reflect(-lightVector, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
-    vec4 specular = spec * vec4(lightColor * objectColor, 1.0);
+    // specular
+    vec3 reflection = normalize(reflect(-lightVector, normal));
+    float specularStrength = pow(max(0.0, dot(cameraVector, reflection)), 10.0);
+    vec3 specular = specularStrength * lightColor;
+    
+    vec3 modelColor = vec3(0.385, 0.647, 0.812, 1.0);
 
-    out_Color = ambient + diffuse + specular;
+    out_Color = modelColor * (ambient + diffuse + specular);
 }

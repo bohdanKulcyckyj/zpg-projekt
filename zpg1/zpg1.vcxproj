@@ -133,11 +133,14 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneForest.cpp" />
@@ -145,6 +148,8 @@
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="SphereModel.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
+    <ClCompile Include="SpotLightCamera.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformComposite.cpp" />
@@ -161,11 +166,14 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightManager.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
@@ -175,6 +183,8 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="SphereModel.h" />
+    <ClInclude Include="SpotLight.h" />
+    <ClInclude Include="SpotLightCamera.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformComposite.h" />
@@ -193,10 +203,12 @@
     <None Include="FragmentShader.glsl" />
     <None Include="FragmentShaderLambert.glsl" />
     <None Include="FragmentShaderPhong.glsl" />
+    <None Include="FragmentShaderPhongMultipleLights.glsl" />
     <None Include="FragmentShaderTest.glsl" />
     <None Include="VertexShader.glsl" />
     <None Include="VertexShaderLambert.glsl" />
     <None Include="VertexShaderPhong.glsl" />
+    <None Include="VertexShaderPhongMultipleLights.glsl" />
     <None Include="VertexShaderTest.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

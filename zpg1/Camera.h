@@ -28,9 +28,9 @@ private:
 	float sensitivity = 0.5f;
 	float speed = 0.5f;
 	float ratio = 0;
-	float fov;
-	float near;
-	float far;
+	float fov = 45;
+	float near = 0.1f;
+	float far = 100;
 	float alpha = 0.0f;
 	float beta = 0.0f;
 
