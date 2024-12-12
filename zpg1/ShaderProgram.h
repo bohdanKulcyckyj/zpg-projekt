@@ -16,10 +16,10 @@ class ShaderProgram : public Observer, public ShaderLoader
 private:
     Camera* camera = nullptr;
     LightManager* lightManager = nullptr;
+    //GLuint	shaderProgramID = 0;
 public:
     ShaderProgram(Camera* c, const char* vertexFile, const char* fragmentFile);
-    ShaderProgram(Camera* c);
-    ShaderProgram(Camera* c, LightManager* l);
+    ShaderProgram(Camera* c, LightManager* lm, const char* vertexFile, const char* fragmentFile);
     ~ShaderProgram();
 
     void setLightManager(LightManager* l);

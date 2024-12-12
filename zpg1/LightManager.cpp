@@ -28,6 +28,11 @@ Light* LightManager::addLight(glm::vec3 position, glm::vec4 color) {
 	return l;
 }
 
+Light* LightManager::addLight(Light* l) {
+	this->lights.push_back(l);
+	return l;
+}
+
 Light* LightManager::getLight(int index) {
 	if (index >= 0 && lightsCount >= index + 1) {
 		return lights.at(index);

@@ -13,6 +13,7 @@
 
 #include "Point.h"
 #include "Subject.h"
+#include "SpotLight.h"
 
 using namespace std;
 
@@ -50,8 +51,14 @@ private:
 
 	glm::vec3 prevPosition = glm::vec3(0.0f);
 	glm::vec3 prevTarget = glm::vec3(0.0f);
+
+	SpotLight* flashlight = nullptr;
+
+	void updateFlashlight();
 public:
 	Camera(GLFWwindow* w);
+
+	void setFlashlight(SpotLight* sl);
 	// getters
 	glm::vec3 getPosition();
 	glm::vec3 getDirection();

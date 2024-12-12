@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glfw-3.3.8.bin.WIN64\include;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glm;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glfw-3.3.8.bin.WIN64\include;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glm;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\include;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\soil\include;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\lib\Release\x64;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glfw-3.3.8.bin.WIN64\lib-vc2022;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\lib\Release\x64;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\glew-2.1.0\lib;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\soil\lib-vc2012\Platform_x64;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\assimp\bin\x64\v141\Release;C:\Users\bohda\OneDrive\Plocha\škola\5.semestr\zpg\assimp\lib\x64\v141\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glfw3.lib;glew32.lib;SOIL.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,11 +131,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="CabinModel.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="DynamicModel.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,10 +150,14 @@
     <ClCompile Include="SceneSpheres.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="SkyCubeModel.cpp" />
     <ClCompile Include="SphereModel.cpp" />
     <ClCompile Include="SpotLight.cpp" />
-    <ClCompile Include="SpotLightCamera.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="TextureCubeMap.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformComposite.cpp" />
     <ClCompile Include="TransformRotate.cpp" />
@@ -164,14 +171,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="cabin.h" />
+    <ClInclude Include="CabinModel.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="DynamicModel.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="OpenGLDebugWrapper.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rectangle.h" />
@@ -181,11 +193,16 @@
     <ClInclude Include="SceneSpheres.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="skyCube.h" />
+    <ClInclude Include="SkyCubeModel.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="SphereModel.h" />
     <ClInclude Include="SpotLight.h" />
-    <ClInclude Include="SpotLightCamera.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="TextureCubeMap.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformComposite.h" />
     <ClInclude Include="TransformRotate.h" />
@@ -204,12 +221,26 @@
     <None Include="FragmentShaderLambert.glsl" />
     <None Include="FragmentShaderPhong.glsl" />
     <None Include="FragmentShaderPhongMultipleLights.glsl" />
+    <None Include="FragmentShaderSkyBox.glsl" />
     <None Include="FragmentShaderTest.glsl" />
+    <None Include="FragmentShaderTexture.glsl" />
     <None Include="VertexShader.glsl" />
     <None Include="VertexShaderLambert.glsl" />
     <None Include="VertexShaderPhong.glsl" />
     <None Include="VertexShaderPhongMultipleLights.glsl" />
+    <None Include="VertexShaderSkyBox.glsl" />
     <None Include="VertexShaderTest.glsl" />
+    <None Include="VertexShaderTexture.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="grass.png" />
+    <Image Include="house.png" />
+    <Image Include="negx.jpg" />
+    <Image Include="negy.jpg" />
+    <Image Include="negz.jpg" />
+    <Image Include="posx.jpg" />
+    <Image Include="posy.jpg" />
+    <Image Include="posz.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

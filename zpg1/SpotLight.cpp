@@ -50,7 +50,7 @@ void SpotLight::updateDirection(glm::vec3 direction)
     this->direction = direction;
 }
 
-void SpotLight::upgradePosition(glm::vec3 pos)
+void SpotLight::updatePosition(glm::vec3 pos)
 {
     this->position = pos;
 }

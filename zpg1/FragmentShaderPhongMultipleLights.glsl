@@ -1,6 +1,5 @@
 #version 330
-// in vec4 worldPos;
-// in vec3 worldNormal;
+
 in vec4 worldFragmentPosition;
 in vec3 worldNormal;
 
@@ -29,9 +28,7 @@ struct Lights {
 
 uniform vec3 cameraPosition;
 uniform vec3 cameraDirection;
-uniform vec4 amb = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 diff = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 spec = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 amb = vec4(0.1, 0.1, 0.1, 1.0);
 uniform vec4 modelColor = vec4(0.385, 0.647, 0.812, 1.0);
 uniform float powExponent = 32.0;
 uniform Lights lights[MAX_LIGHTS];
@@ -74,28 +71,28 @@ vec4 computeBaseLight(Lights light) {
 
     // diffuse
     float diffuseStrength = max(0.0, dot(lightVector, normal));
-    vec4 diffuse = diff * light.color * diffuseStrength;
+    vec4 diffuse = light.color * diffuseStrength; // diff *
 
     // specular
     vec3 reflection = normalize(reflect(-lightVector, normal));
     float specularStrength = pow(max(0.0, dot(cameraVector, reflection)), powExponent);
-    vec4 specular = spec * specularStrength * light.color;
+    vec4 specular = specularStrength * light.color; // spec *
 
     return (ambient + diffuse + specular);
 }
 vec4 computePointLight(Lights light) {
     vec3 lightVector = normalize(light.position - worldFragmentPosition.xyz);
     vec3 cameraVector = normalize(cameraPosition - worldFragmentPosition.xyz);
-    vec4 ambient = light.ambient * amb * light.color;
+    vec4 ambient = light.ambient * amb * light.color; // * amb *
 
     float diffIntensity = max(dot(lightVector, worldNormal), 0.0);
-    vec4 diffuse = light.diffuse * diff * diffIntensity * light.color;
+    vec4 diffuse = light.diffuse * diffIntensity * light.color; // * diff **
 
     vec3 reflection = reflect(-lightVector, worldNormal);
 
     float specularStrength = pow(max(dot(cameraVector, reflection), 0.0), powExponent);
     float dist = length(light.position - worldFragmentPosition.xyz);
-    vec4 specular = light.specular * spec * specularStrength * light.color;
+    vec4 specular = light.specular * specularStrength * light.color; // * spec **
 
     float att = attenuation(light.constant, light.linear, light.quadratic, dist);
 
@@ -112,12 +109,12 @@ vec4 computeDirectionalLight(Lights light) {
     vec4 ambient = light.ambient * amb * light.color;
 
     float diffIntensity = max(dot(lightVector, worldNormal), 0.0);
-    vec4 diffuse = light.diffuse * diff * diffIntensity * light.color;
+    vec4 diffuse = light.diffuse * diffIntensity * light.color; // * diff **
 
     vec3 cameraVector = normalize(cameraPosition - vec3(worldFragmentPosition / worldFragmentPosition.w));
     vec3 reflection = reflect(-lightVector, worldNormal);
     float specularStrength = pow(max(dot(cameraVector, reflection), 0.0), powExponent);
-    vec4 specular = light.specular * spec * specularStrength;
+    vec4 specular = light.specular * specularStrength; // * spec *
 
     return (ambient + diffuse + specular);
 }
@@ -128,14 +125,14 @@ vec4 computeSpotLight(Lights light) {
 
     vec3 lightVector = normalize(light.position - vec3(worldFragmentPosition / worldFragmentPosition.w));
     float diffIntensity = max(dot(lightVector, worldNormal), 0.0);
-    vec4 diffuse = light.diffuse * diff * diffIntensity * light.color;
+    vec4 diffuse = light.diffuse * diffIntensity * light.color; // * diff **
 
     // specular
     vec3 cameraVector = normalize(cameraPosition - vec3(worldFragmentPosition / worldFragmentPosition.w));
     vec3 reflection = reflect(-lightVector, worldNormal);
 
     float specularStrength = pow(max(dot(cameraVector, reflection), 0.0), powExponent);
-    vec4 specular = light.specular * specularStrength * spec * light.color;
+    vec4 specular = light.specular * specularStrength * light.color; // ** spec *
 
     // soft edges
     float theta = dot(lightVector, normalize(-light.direction));

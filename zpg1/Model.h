@@ -1,6 +1,8 @@
 #pragma once
 #include "ShaderProgram.h"
 
+using namespace std;
+
 class Model
 {
 protected:

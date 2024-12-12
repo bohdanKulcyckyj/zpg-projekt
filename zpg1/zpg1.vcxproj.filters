@@ -22,6 +22,12 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{c99f2cad-2cba-4cf5-bc68-add2cadd6924}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{debad8c2-d85f-4994-9cbf-12e2c44d518a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\cubemap">
+      <UniqueIdentifier>{d67f366d-6190-4591-9b9d-25727d09d95b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -111,10 +117,31 @@
     <ClCompile Include="SpotLight.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="SpotLightCamera.cpp">
+    <ClCompile Include="DirectionalLight.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
+    <ClCompile Include="Material.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyCubeModel.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCubeMap.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicModel.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="CabinModel.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,10 +245,40 @@
     <ClInclude Include="SpotLight.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="SpotLightCamera.h">
+    <ClInclude Include="DirectionalLight.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
+    <ClInclude Include="OpenGLDebugWrapper.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyCubeModel.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="skyCube.h">
+      <Filter>Resources\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCubeMap.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="cabin.h">
+      <Filter>Resources\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicModel.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="CabinModel.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
   </ItemGroup>
@@ -256,5 +313,37 @@
     <None Include="VertexShaderPhongMultipleLights.glsl">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="VertexShaderSkyBox.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="FragmentShaderSkyBox.glsl" />
+    <None Include="FragmentShaderTexture.glsl" />
+    <None Include="VertexShaderTexture.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="negx.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="negy.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="negz.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="posx.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="posy.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="posz.jpg">
+      <Filter>Resources\Textures\cubemap</Filter>
+    </Image>
+    <Image Include="grass.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="house.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

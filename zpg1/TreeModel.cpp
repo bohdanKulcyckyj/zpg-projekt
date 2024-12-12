@@ -1,4 +1,5 @@
 #include "TreeModel.h"
+#include "OpenGLDebugWrapper.h"
 
 TreeModel::TreeModel() : Model() {
 	// Vertex buffer object (VBO)
@@ -20,5 +21,5 @@ TreeModel::TreeModel() : Model() {
 
 void TreeModel::draw() {
 	glBindVertexArray(this->VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 92814);
+	WITH_DEBUG(glDrawArrays(GL_TRIANGLES, 0, 92814));
 }

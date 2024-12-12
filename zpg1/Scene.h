@@ -18,7 +18,12 @@
 #include "TransformTranslateDynamic.h"
 #include "Vertex.h"
 #include "Light.h"
-#include "LightManager.h";
+#include "LightManager.h"
+#include "Texture.h"
+#include "TextureCubeMap.h"
+#include "TextureManager.h"
+#include "SkyCubeModel.h"
+#include "DynamicModel.h"
 
 class Scene
 {

@@ -2,6 +2,8 @@
 
 Camera::Camera(GLFWwindow* w) {
 	this->window = w;
+	computeProjectionMatrix();
+	computeViewMatrix();
 }
 
 glm::mat4 Camera::getCamera(void) {
@@ -12,21 +14,25 @@ void Camera::controls() {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		eye += speed * target;
+		updateFlashlight();
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		eye -= speed * target;
+		updateFlashlight();
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		eye -= speed * glm::normalize(glm::cross(target, up));
+		updateFlashlight();
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		eye += speed * glm::normalize(glm::cross(target, up));
+		updateFlashlight();
 	}
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
@@ -59,6 +65,9 @@ void Camera::controls() {
 		target.x = sin(glm::radians(alpha)) * cos(glm::radians(beta));
 		target.y = sin(glm::radians(beta));
 		target.z = cos(glm::radians(alpha)) * -cos(glm::radians(beta));
+		target = glm::normalize(target);
+
+		updateFlashlight();
 	}
 	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
 	{
@@ -136,6 +145,18 @@ void Camera::computeViewMatrix() {
 void Camera::computeProjectionMatrix() {
 
 	this->projectionMatrix = glm::perspective(glm::radians(fov), ratio, near, far);
+}
+
+void Camera::setFlashlight(SpotLight* sl) {
+	this->flashlight = sl;
+}
+
+void Camera::updateFlashlight() {
+	if (flashlight) {
+		flashlight->updateDirection(this->getDirection());
+		flashlight->updatePosition(this->getPosition());
+		flashlight->notifyAll(LIGHT);
+	}
 }
 
 void Camera::notifyAll(int message) {

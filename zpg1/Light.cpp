@@ -3,9 +3,6 @@
 Light::Light(glm::vec3 pos, glm::vec4 col) {
 	position = pos;
 	color = col;
-
-	this->notifyAll(LIGHTCOLOR);
-	this->notifyAll(LIGHTPOSITION);
 }
 
 glm::vec3 Light::getPosition() {

@@ -5,8 +5,7 @@
 
 #define PROJECTIONMATRIX 0
 #define VIEWMATRIX 1
-#define LIGHTCOLOR 2
-#define LIGHTPOSITION 3
+#define LIGHT 2
 
 class Subject
 {

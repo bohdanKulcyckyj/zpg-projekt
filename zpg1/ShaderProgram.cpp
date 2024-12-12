@@ -1,17 +1,18 @@
 #include "ShaderProgram.h"
 #include <iostream>
 
-ShaderProgram::ShaderProgram(Camera* c) : ShaderLoader() {
+ShaderProgram::ShaderProgram(Camera* c, const char* vertexFile, const char* fragmentFile) : ShaderLoader(vertexFile, fragmentFile, &this->shaderProgramID) {
 	camera = c;
+	camera->attach(this);
 }
 
-ShaderProgram::ShaderProgram(Camera* c, LightManager* lm) : ShaderLoader() {
+ShaderProgram::ShaderProgram(Camera* c, LightManager* lm, const char* vertexFile, const char* fragmentFile) : ShaderLoader(vertexFile, fragmentFile, &this->shaderProgramID) {
 	camera = c;
+	camera->attach(this);
 	lightManager = lm;
-}
-
-ShaderProgram::ShaderProgram(Camera* c, const char* vertexFile, const char* fragmentFile) : ShaderLoader() {
-	this->shaderProgramID = this->loadShader(vertexFile, fragmentFile);
+	use();
+	updateLights();
+	unuse();
 }
 
 void ShaderProgram::setLightManager(LightManager* lm) {
@@ -35,21 +36,12 @@ void ShaderProgram::unuse() {
 
 void ShaderProgram::update(int message)
 {
-	/*use();
-	updateUniform("lightColor", light->getColor());
-	updateUniform("lightPosition", light->getPosition());
-	updateUniform("viewMatrix", glm::value_ptr(camera->getViewMatrix()));
-	updateUniform("cameraPosition", camera->getPosition());
-	updateUniform("cameraDirection", camera->getDirection());
-	unuse();*/
-
 	use();
 	updateLights();
 	unuse();
 
 	if (message == VIEWMATRIX)
 	{
-		printf("updating view matrix\n");
 		use();
 		updateUniform("viewMatrix", glm::value_ptr(camera->getViewMatrix()));
 		updateUniform("cameraPosition", camera->getPosition());
@@ -61,7 +53,6 @@ void ShaderProgram::update(int message)
 
 	if (message == PROJECTIONMATRIX)
 	{
-		printf("updating projection matrix\n");
 		use();
 		updateUniform("projectionMatrix", glm::value_ptr(camera->getProjectionMatrix()));
 		unuse();
@@ -69,23 +60,11 @@ void ShaderProgram::update(int message)
 		return;
 	}
 
-	if (message == LIGHTCOLOR && lightManager != nullptr) {
-		printf("updating light color");
+	if (message == LIGHT && lightManager != nullptr) {
 		use();
-		// updateUniform("lightColor", light->getColor());
 		updateLights();
 		unuse();
 	}
-
-	if (message == LIGHTPOSITION && lightManager != nullptr) {
-		printf("updating light position");
-		use();
-		// updateUniform("lightPosition", light->getPosition());
-		updateLights();
-		unuse();
-	}
-
-	throw exception("Unknown update message");
 }
 
 void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)

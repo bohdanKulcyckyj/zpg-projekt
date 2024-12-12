@@ -45,10 +45,9 @@ void Application::initialization() {
 
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 
-	// scene = new SceneSpheres(window);
+	//scene = new SceneSpheres(window);
 	scene = new SceneForest(window);
 	scene->registerCallbacks();
 }
